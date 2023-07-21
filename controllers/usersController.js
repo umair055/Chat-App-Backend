@@ -49,10 +49,10 @@ module.exports.setAvatar = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const avatarImage = req.body.image;
-    const userData = await User.findByIdAndUpdate(userId, {
-      isAvatarImageSet: true,
-      avatarImage,
-    });
+    const userData = await User.findOne({ _id: userId });
+    userData.isAvatarImageSet = true;
+    userData.avatarImage = avatarImage;
+    await userData.save();
     return res.json({
       isSet: userData.isAvatarImageSet,
       image: userData.avatarImage,
