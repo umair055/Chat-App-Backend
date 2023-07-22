@@ -3,20 +3,15 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
 require("dotenv").config();
-const userRoutes = require("../routes/userRoutes");
-const messagesRoutes = require("../routes/messagesRoutes");
+const userRoutes = require("./routes/userRoutes");
+const messagesRoutes = require("./routes/messagesRoutes");
 const socket = require("socket.io");
-const serverless = require("serverless-http");
-const router = require("express").Router();
 
 app.use(cors());
 app.use(express.json());
-router.get("/", (req, res) => {
-  res.json({ hello: "hi!" });
-});
-app.use("/.netlify/funtions/api", router);
-app.use("/.netlify/funtions/api/auth", userRoutes);
-app.use("/.netlify/funtions/api/messages", messagesRoutes);
+
+app.use("/api/auth", userRoutes);
+app.use("/api/messages", messagesRoutes);
 mongoose
   .connect(process.env.MONGO_URl, {
     useNewUrlParser: true,
@@ -46,4 +41,3 @@ io.on("connection", (socket) => {
     }
   });
 });
-module.exports.handler = serverless(app);
