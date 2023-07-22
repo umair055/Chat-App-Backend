@@ -14,9 +14,9 @@ app.use(express.json());
 router.get("/", (req, res) => {
   res.json({ hello: "hi!" });
 });
-app.use("/api", router);
-app.use("/api/auth", userRoutes);
-app.use("/api/messages", messagesRoutes);
+app.use("/.netlify/funtions/api", router);
+app.use("/.netlify/funtions/api/auth", userRoutes);
+app.use("/.netlify/funtions/api/messages", messagesRoutes);
 mongoose
   .connect(process.env.MONGO_URl, {
     useNewUrlParser: true,
