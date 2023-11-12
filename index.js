@@ -29,7 +29,10 @@ const server = app.listen(process.env.PORT, () =>
 );
 
 const io = socket(server, {
-  cors: { origin: "https://chit-chat-smoky.vercel.app", credentials: true },
+  cors: {
+    origin: "https://chit-chat-zj22r7ikb-umair055.vercel.app",
+    credentials: true,
+  },
 });
 
 global.onlineUsers = new Map();
