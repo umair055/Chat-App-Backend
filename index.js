@@ -12,11 +12,15 @@ app.use(express.json());
 
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messagesRoutes);
+
 mongoose
-  .connect(process.env.MONGO_URl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://umairtariq403:1234@demandordergenerator.swgyxwz.mongodb.net/?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => console.log("DATABASE CONNECTED SUCCESSFULLY"))
   .catch((err) => console.log(err));
 
